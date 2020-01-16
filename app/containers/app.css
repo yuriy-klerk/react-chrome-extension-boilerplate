@@ -1,0 +1,23 @@
+.app {
+    width:100%;
+    position: absolute;
+    z-index: 1;
+}
+
+/* GLOBAL MODIFICATORS: */
+
+.textYellow {
+    color: #f9efc1;
+}
+
+.textBrown {
+    color: #e75225;
+}
+
+.textTurquoise {
+    color: #20968b;
+}
+
+textBlue {
+    color: #45c3ec;
+}

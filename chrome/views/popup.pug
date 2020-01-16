@@ -2,13 +2,18 @@ doctype html
 
 html
   head
+    block styles
     meta(charset='UTF-8')
     title Redux TodoMVC Example (Popup)
     style.
-      body { width: 500px; }
+      @import url('/bg/css/bootstrap-3.3.2-dist/css/bootstrap.min.css');
+      @import url('/bg/css/index.css');
+
 
   body
     #root
-    if env !== 'prod'
-      script(src='chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/redux-devtools-extension.js')
+    //canvas(id='canvas-bottom' width=600 height=600)
+    //canvas(id='canvas-top' width=600 height=600)
     script(src=env == 'prod' ? '/js/todoapp.bundle.js' : 'http://localhost:3000/js/todoapp.bundle.js')
+    //script(src=env == 'prod' ? '/bg/js/main.js' : '/bg/js/main.js')
+    //script(src=env == 'prod' ? '/bg/js/index.js' : '/bg/js/index.js')

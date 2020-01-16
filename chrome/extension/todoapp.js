@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from '../../app/containers/Root';
+import {STORE} from "../../app/stores/store";
+import App from '../../app/containers/App';
+import {getPrice24H, GET_PRICE_24H} from "../../app/actions/ApiActions";
+import badgeService from "../../app/services/badgeService";
 import './todoapp.css';
-
 chrome.storage.local.get('state', (obj) => {
-  const { state } = obj;
-  const initialState = JSON.parse(state || '{}');
-
-  const createStore = require('../../app/store/configureStore');
+  const BadgeServiceHandle = new badgeService();
+  STORE.price24H.sideEffectSubscribe(GET_PRICE_24H, (value) => {
+    BadgeServiceHandle.setChrome(value);
+  });
+  STORE.dispatch(getPrice24H());
 
   ReactDOM.render(
-    <Root store={createStore(initialState)} />,
+    <App/>,
     document.querySelector('#root')
   );
 });

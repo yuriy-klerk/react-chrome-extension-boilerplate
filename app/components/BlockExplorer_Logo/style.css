@@ -1,0 +1,32 @@
+.BlockExplorerLogo {
+    margin: 15px auto;
+    font-size:20px;
+    font-family: TB;
+    text-align: center;
+    width: 310px;
+}
+
+.BlockExplorerLogo__image {
+    display: inline-block;
+    width:30px;
+    height:36px;
+    margin-top: -9px;
+}
+
+.BlockExplorerLogo__text {
+    display: inline-block;
+    letter-spacing: 3px;
+    font-size:30px;
+}
+
+.BlockExplorerLogo__textYellow {
+    color: #f9efc1;
+}
+
+.BlockExplorerLogo__textTurquoise {
+    color: #20968b;
+}
+
+.BlockExplorerLogo__slogan {
+    color: #e75225;
+}
