@@ -1,9 +1,10 @@
+.idea
 node_modules
 npm-debug.log
 .DS_Store
 
-build/
-dev/
+build
+dev
 
 *.zip
 *.crx
