@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
 import {STORE} from "../../stores/store";
+import {useStore} from "rxsm";
 import {setSearchField} from "../../actions/BlockExplorerActions";
 import {getAddressInfo, getTransactionInfo, GET_ADDRESS_INFO, GET_TRANSACTION_INFO} from "../../actions/ApiActions";
 import BlockExplorerLogo from "../BlockExplorer_Logo";
+import BlockExplorerSearch from "../BlockExplorer_Search";
+import BlockExplorerWidget from "../BlockExplorer_Widget";
+import BlockExplorerResult from "../BlockExplorer_Result";
 import Styles from "./style.css";
+import Spinner from "../Spinner";
 
 export default class BlockExplorer extends Component {
 
     constructor(props) {
         super(props);
-        STORE.searchResult.sideEffectSubscribe(GET_ADDRESS_INFO, (data) => {
-            console.log(data);
-        });
-        STORE.searchResult.sideEffectSubscribe(GET_TRANSACTION_INFO, (data) => {
-            console.log(data);
+        this.state = {
+            isLoading: false
+        };
+    }
+
+    componentDidMount() {
+        STORE.isLoading.subscribe((value) => {
+            this.setState({
+                isLoading: value
+            });
         });
     }
 
@@ -26,12 +36,10 @@ export default class BlockExplorer extends Component {
         return (
             <div className={Styles.BlockExplorer}>
                 <BlockExplorerLogo/>
-                <input value={"16K4VtKNxcaNkvNvDYiiWjyn1n49irJ8Ep"} type={"text"} onChange={e => {
-                    STORE.dispatch(setSearchField(e.target.value))
-                }}/>
-                <input value={"Search"} type={"button"} onClick={e => {
-                    this.search()
-                }}/>
+                <BlockExplorerSearch/>
+                <BlockExplorerResult/>
+                <BlockExplorerWidget/>
+                <Spinner isLoading={this.state.isLoading}/>
             </div>
         )
     }

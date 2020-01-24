@@ -65,7 +65,7 @@ const baseDevConfig = () => ({
                 }
             ]
         }, {
-          test: /\.(svg|otf|ttf|eot|woff|woff2)$/,
+          test: /\.(svg|otf|ttf|eot|woff|woff2|gif)$/,
           loader: 'url-loader'
         }]
     }

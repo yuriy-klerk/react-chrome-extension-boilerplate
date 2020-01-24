@@ -1,0 +1,11 @@
+.Spinner {
+    position:absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+}
+
+.Spinner__Image {
+    width:60px;
+}

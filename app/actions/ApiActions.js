@@ -1,5 +1,6 @@
 import React from "react";
 import ExplorerConfig from "../config/explorerConfig.json"
+import {formatFee, formatPriceBTC} from "../services/priceFormatter";
 
 export const GET_ADDRESS_INFO = "GET_ADDRESS_INFO";
 export const GET_TRANSACTION_INFO = "GET_TRANSACTION_INFO";
@@ -16,32 +17,73 @@ export const TRANSACTION_TYPE = "TRANSACTION_TYPE";
 export const getAddressInfo = (addressValue) => ({
     name: GET_ADDRESS_INFO,
     func: async () => {
-        let response = await fetch(`${ExplorerConfig.API_URL}/multiaddr?active=${addressValue}`);
-        let data = await response.json();
-        return {
+        let result = null;
+        try {
+            let response = await fetch(`${ExplorerConfig.API_URL}/multiaddr?active=${addressValue}`);
+            result = await response.json();
+        } catch (e) {
+
+        }
+        return result ? {
             searchResult: {
                 type: ADDRESS_TYPE,
-                data: data.addresses[0]
+                data: result
             }
-        };
+        } : {
+            searchResult: null
+        }
     }
 });
 
 export const getTransactionInfo = (transactionValue) => ({
     name: GET_TRANSACTION_INFO,
     func: async () => {
-        let response = await fetch(`${ExplorerConfig.API_URL}/rawtx/${transactionValue}?limit=1&cors=true`);
-        let data = await response.json(), confirmations = 0, latestBlock = parseInt(await fetchBlockChainHeight(), 10);
-        if (typeof data.block_height != "undefined") {
-            alert(latestBlock, data.block_height)
-            confirmations = (latestBlock - data.block_height) + 1;
+        let result = null;
+        try {
+            let response = await fetch(`${ExplorerConfig.API_URL}/rawtx/${transactionValue}?limit=1&cors=true`);
+            // Calc confirmations
+            let confirmations = 0, height = 0;
+            result = await response.json();
+            let latestBlock = parseInt(await fetchBlockChainHeight(), 10);
+            if (typeof result.block_height != "undefined") {
+                confirmations = (latestBlock - result.block_height) + 1;
+                height = result.block_height;
+            }
+            result['confirmations'] = confirmations;
+            result['height'] = height;
+            // Calc inputs
+            let inputs_value = 0;
+            if (typeof result.inputs !== "undefined" && result.inputs.length > 0) {
+                for (let i = 0; i < result.inputs.length; i++) {
+                    inputs_value += result.inputs[i].prev_out.value
+                }
+            }
+            result['inputs_value'] = formatPriceBTC(inputs_value);
+            // Calc out
+            let output_value = 0;
+            if (typeof result.out !== "undefined" && result.out.length > 0) {
+                for (let i = 0; i < result.out.length; i++) {
+                    output_value += result.out[i].value
+                }
+            }
+            result['outputs_value'] = formatPriceBTC(output_value);
+
+            // Calc fee
+            let fee_value = 0;
+            if (inputs_value > 0 && output_value > 0) {
+                fee_value = inputs_value - output_value;
+            }
+            result['fee_value'] = formatPriceBTC(fee_value);
+        } catch (e) {
+            console.log(e)
         }
-        data['confirmations'] = confirmations;
-        return {
+        return result ? {
             searchResult: {
                 type: TRANSACTION_TYPE,
-                data: data
+                data: result
             }
+        } : {
+            searchResult: null
         }
     }
 });

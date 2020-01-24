@@ -133,7 +133,7 @@
             orbRadius: 1,
             minProximity: 50,
             initialColorAngle: 7,
-            colorFrequency: .3,
+            colorFrequency: .03,
             colorAngleIncrement: .0000009,
             globalAlpha: .01,
             manualWidth: !1,

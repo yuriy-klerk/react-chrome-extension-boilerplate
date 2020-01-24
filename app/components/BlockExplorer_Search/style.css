@@ -1,14 +1,31 @@
 
 .BlockExplorerSearch {
-
+    font-family: TB;
+    width: 80%;
+    margin: 100px auto 0;
 }
 
 .BlockExplorerSearch__input {
     background: none;
-    border:1px solid #00948b;
+    border: 1px solid #00948b;
+    display: inline-block;
+    height: 40px;
+    width: calc(100% - 106px);
+    outline: none;
+    color:rgba(255,255,255, 0.5);
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
 .BlockExplorerSearch__button {
-    background: none;
-
+    background: #00948b;
+    color: white;
+    cursor: pointer;
+    width:106px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    height:40px;
+    padding-top:12px;
+    user-select: none;
 }

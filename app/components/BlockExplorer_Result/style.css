@@ -1,0 +1,30 @@
+.BlockExplorerResult {
+    background: rgba(38, 38, 51, 0.4);
+    width: 80%;
+    margin: 25px auto 0;
+}
+
+.BlockExplorer__Block {
+
+}
+
+.BlockExplorer__Header {
+    padding-left: 10px;
+    padding-top: 7px;
+    color: #20968b;
+    display: inline-block;
+    width: calc(100% - 142px);
+}
+
+.BlockExplorer__Content {
+    color: rgba(255,255,255,0.8);
+    display: inline-block;
+    width: 142px;
+    white-space: nowrap;
+}
+
+.BlockExplorer__Link {
+    color: #45c3ec;
+    display: inline-block;
+    width: 102px;
+}
