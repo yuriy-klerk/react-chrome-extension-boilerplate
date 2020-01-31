@@ -5,6 +5,8 @@ const store = {
     searchField: "",
     searchResult: {},
     price24H: "",
+    vol24H: "",
+    hashRate: "",
     blockChainHeight : 0
 };
 

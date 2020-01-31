@@ -55,7 +55,9 @@ export const getTransactionInfo = (transactionValue) => ({
             let inputs_value = 0;
             if (typeof result.inputs !== "undefined" && result.inputs.length > 0) {
                 for (let i = 0; i < result.inputs.length; i++) {
-                    inputs_value += result.inputs[i].prev_out.value
+                    if (typeof result.inputs[i].prev_out != "undefined") {
+                        inputs_value += result.inputs[i].prev_out.value;
+                    }
                 }
             }
             result['inputs_value'] = formatPriceBTC(inputs_value);
@@ -113,7 +115,9 @@ export const getVol24H = () => ({
     func: async () => {
         let response = await fetch(`${ExplorerConfig.API_URL}/q/marketcap`);
         let data = await response.text();
-        return data;
+        return {
+            vol24H: data
+        };
     }
 });
 
@@ -122,7 +126,9 @@ export const getHashRate = () => ({
     func: async () => {
         let response = await fetch(`${ExplorerConfig.API_URL}/q/hashrate`);
         let data = await response.text();
-        return data;
+        return {
+            hashRate: data
+        };
     }
 });
 

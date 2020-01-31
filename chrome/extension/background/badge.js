@@ -3,7 +3,7 @@ const fetchPrice24H = async () => {
   let response = await fetch(`https://blockchain.info/q/24hrprice`);
   let data = await response.text();
   return {
-    price24H: data
+    price24H: data.split(".")[0]
   };
 
 }

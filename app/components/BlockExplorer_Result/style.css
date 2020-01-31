@@ -1,7 +1,7 @@
 .BlockExplorerResult {
     background: rgba(38, 38, 51, 0.4);
     width: 80%;
-    margin: 25px auto 0;
+    margin: 15px auto 0;
 }
 
 .BlockExplorer__Block {
@@ -17,7 +17,7 @@
 }
 
 .BlockExplorer__Content {
-    color: rgba(255,255,255,0.8);
+    color: rgba(255, 255, 255, 0.8);
     display: inline-block;
     width: 142px;
     white-space: nowrap;
@@ -27,4 +27,29 @@
     color: #45c3ec;
     display: inline-block;
     width: 102px;
+}
+
+.BlockExplorer__ShowMoreBlock {
+    width: 100%;
+    text-align: center;
+}
+
+.BlockExplorer__ShowMoreButton {
+    background-color: #e75225;
+    color: white;
+    cursor: pointer;
+    width: 106px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    height: 40px;
+    padding-top: 12px;
+    user-select: none;
+}
+
+.BlockExplorer__Details {
+    display: block;
+}
+.BlockExplorer__DetailsHidden {
+    display: none;
 }

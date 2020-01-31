@@ -30,7 +30,9 @@ export default class BlockExplorerSearch extends Component {
 
     render() {
         return (
-            <div className={Styles.BlockExplorerSearch}>
+            <div className={Styles.BlockExplorerSearch} style={{
+                "margin": "100px auto 0"
+            }}>
                 <input ref={(c) => this.input = c} defaultValue={this.input}
                        placeholder={"Enter address or transaction"} className={Styles.BlockExplorerSearch__input}
                        type={"text"} autoFocus={true} onKeyPress={(e) => {
